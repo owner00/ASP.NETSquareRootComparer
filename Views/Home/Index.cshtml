@@ -1,0 +1,61 @@
+﻿@{
+    ViewData["Title"] = "Square Root Comparer Web App";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Compare Me!</h1>
+</div>
+<div class ="text-center">
+    <form asp-controller="Home" asp-action="Index" method="POST">
+        <input type="number" placeholder="First Number" name="firstNumber">
+        <input type="number" placeholder="Second Number" name="secondNumber">
+        <button type="submit">COMPARE</button>
+    </form>
+</div>
+
+@{
+    if(ViewBag.FirstNumber != null && ViewBag.SecondNumber != null)
+    {
+        if(ViewBag.FirstNumber > 0 && ViewBag.SecondNumber > 0){
+            double firstSqRt = Math.Sqrt(ViewBag.FirstNumber);
+            double secondSqRt = Math.Sqrt(ViewBag.SecondNumber);
+            if(firstSqRt == secondSqRt)
+            {
+                <div class="text-center">
+                    <p>The Square Root are equal. ENTER ANOTHER VALUE!</p>
+                </div>
+            }
+            else
+            {
+                int greaterNumber = 0;
+                int lesserNumber = 0;
+                double greaterSqRt = 0.0;
+                double lesserSqRt = 0.0;
+                if(ViewBag.FirstNumber > ViewBag.SecondNumber)
+                {
+                    greaterNumber = ViewBag.FirstNumber;
+                    lesserNumber = ViewBag.SecondNumber;
+                    greaterSqRt = firstSqRt;
+                    lesserSqRt = secondSqRt;
+                }
+                else
+                {
+                    greaterNumber = ViewBag.SecondNumber;
+                    lesserNumber = ViewBag.FirstNumber;
+                    greaterSqRt = secondSqRt;
+                    lesserSqRt = firstSqRt;
+                }
+                <div class="text-center">
+                    <p>The number @greaterNumber with Square root @greaterSqRt has a higher square root than the number @lesserNumber with square root @lesserSqRt</p>
+                </div>
+            }
+        }
+        else
+        {
+            <div class="text-center">
+                <p>Error! Invalid Input. Try with better input(*~*)!</p>
+            </div>
+        }
+    }
+    
+}
